@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext} from 'react-beautiful-dnd';
 import { Flex } from '@chakra-ui/react';
 import Column from './components/Column';
-import AddCardModal from './components/AddCardModal';
+// import AddCardModal from './components/AddCardModal';
 
 const initialData = {
   todo: [
     { id: '1', content: 'Project A' },
     { id: '2', content: 'Project B' },
     { id: '3', content: 'Project C' },
+    { id: '4', content: 'Project D' },
   ],
   inProgress: [],
   review: [],
@@ -82,14 +83,14 @@ const App = () => {
           <Column key={key} column={key} tasks={data[key]} openModal={openModal} />
         ))}
       </Flex>
-      <AddCardModal
+      {/* <AddCardModal
         isOpen={isModalOpen}
         onClose={closeModal}
         currentColumn={currentColumn}
         newCardName={newCardName}
         setNewCardName={setNewCardName}
         handleAddCard={handleAddCard}
-      />
+      /> */}
     </DragDropContext>
   );
 };
