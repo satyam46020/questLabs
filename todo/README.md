@@ -1,4 +1,4 @@
-TODO Appication
+TODO Application
 
 Deployed URL
 
