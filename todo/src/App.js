@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import Column from './Column';
-import AddCardModal from './AddCardModal';
+import { DragDropContext} from 'react-beautiful-dnd';
+import { Flex } from '@chakra-ui/react';
+import Column from './components/Column';
+import AddCardModal from './components/AddCardModal';
 
 const initialData = {
   todo: [
@@ -25,8 +25,19 @@ const App = () => {
     localStorage.setItem('data', JSON.stringify(data));
   }, [data]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [newCardName, setNewCardName] = useState('');
   const [currentColumn, setCurrentColumn] = useState('');
+
+  const openModal = (column) => {
+    setCurrentColumn(column);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setNewCardName('');
+    setIsModalOpen(false);
+  };
 
   const handleAddCard = () => {
     const newCard = { id: String(Date.now()), content: newCardName };
@@ -71,7 +82,14 @@ const App = () => {
           <Column key={key} column={key} tasks={data[key]} openModal={openModal} />
         ))}
       </Flex>
-      <AddCardModal/>
+      <AddCardModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        currentColumn={currentColumn}
+        newCardName={newCardName}
+        setNewCardName={setNewCardName}
+        handleAddCard={handleAddCard}
+      />
     </DragDropContext>
   );
 };
